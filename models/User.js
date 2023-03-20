@@ -5,16 +5,9 @@ const userSchema = new mongoose.Schema(
         _id: { type: Schema.ObjectId },
         username: { String, unique: true, required: true, trim: true },
         email: { String, unique: true, required: true }, //add validation
-        referrals: [
-            {
-            type: mongoose.Schema.Types.ObjectId, ref: 'User',
-            type: mongoose.Schema.Types.ObjectId, ref: 'Thought'
-            }
-        ]
-        // thoughts: {}, //array of _id values referencing Thought model
-        // friends: {}, //array of_id values referencing User model (self-reference)
+        thoughts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Thought'}], //array of _id values referencing Thought model
+        friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User'}], //array of_id values referencing User model (self-reference)
     },
-    //will probably want to use virtuals for thoughts
     {
         toJSON: {
             virtuals: true,
@@ -23,7 +16,7 @@ const userSchema = new mongoose.Schema(
     }
 );
 
-//TODO: add virtual for thoughts per user
+//TODO: add virtual for friendCount
 
 const User = mongoose.model('User', userSchema);
 
