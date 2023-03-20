@@ -6,7 +6,7 @@ const thoughtSchema = new mongoose.Schema(
         content: { String, required: true }, //add validation for length between 1 - 280 chars
         createdAt: { Date, default: Date.now },
         username: { String, required: true },
-        reactions: { }
+        reactions: [thoughtSchema], //not sure if correct
     }
 );
 
