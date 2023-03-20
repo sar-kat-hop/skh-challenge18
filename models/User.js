@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema(
     }
 );
 
-//TODO: add virtual for friendCount
+//TODO: add virtual for friendCount retrieving length of user's friends array on query
 
 const User = mongoose.model('User', userSchema);
 
