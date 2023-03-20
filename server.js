@@ -29,6 +29,7 @@ mongodb.connect(
 
 app.use(express.json());
 
+//may not actually need this except for testing... probably will want to have /controllers folder with routes
 app.get('/all-thoughts', (req, res) => {
     db.collection('snapi')
         .find({ '': { } }) //add desired criteria to pull all thoughts available in db, perhaps sorted by newest or something
