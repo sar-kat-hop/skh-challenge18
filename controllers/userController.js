@@ -21,4 +21,14 @@ module.exports = {
       .then((dbUserData) => res.json(dbUserData))
       .catch((err) => res.status(500).json(err));
   },
+  // add friend
+  addFriend(req, res) {
+
+  },
+  // remove (delete) friend
+  removeFriend(req, res) {
+    
+  }
 };
+
+
