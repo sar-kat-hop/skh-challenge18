@@ -19,7 +19,7 @@ router.route('/')
 router.route('/:id')
     .get(getOneThought)
     .put(updateThought)
-    .delete(deleteThought)
+    .delete(deleteThought);
 
 // create new thought
 // does it need to be router.route('/:userId')?
@@ -28,10 +28,11 @@ router.route('/')
 
 // create new reaction
 router.route('/:thoughtId/reactions/:reactionId')
-    .post(addReaction)
+    .post(addReaction);
 
 // delete reaction
 router.route('/:thoughtId/reactions/:reactionId')
-    .delete(deleteReaction)
+    .delete(deleteReaction);
+    
 
 module.exports = router;

@@ -6,7 +6,7 @@ module.exports = {
       .then((users) => res.json(users))
       .catch((err) => res.status(500).json(err));
   },
-  getSingleUser(req, res) {
+  getOneUser(req, res) {
     User.findOne({ _id: req.params.userId }) //not sure about params syntax
       .then((user) =>
         !user
