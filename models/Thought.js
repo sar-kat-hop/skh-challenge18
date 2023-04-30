@@ -3,7 +3,7 @@ const { Schema, Types, model } = require('mongoose');
 
 const thoughtSchema = new Schema(
     {
-        // _id: { type: ObjectId },
+        // _id: { type: ObjectId }, //no need to include this: mongoose will auto generate with id: false
         thoughtText: { 
             type: String, 
             required: true, 
@@ -18,7 +18,7 @@ const thoughtSchema = new Schema(
             type: String, 
             required: true 
         },
-        userId: { 
+        userId: {           
             type: String, 
             required: true 
         },
@@ -38,7 +38,7 @@ const reactionSchema = new Schema(
     {
         reactionId: { 
             type: ObjectId, 
-            default: new Types.ObjectId()
+            default: () => new Types.ObjectId()
         },
         reactionText: { 
             type: String, 
