@@ -7,11 +7,11 @@ mongoose.connect('mongodb://localhost/snapiDB',
 }
 );
 
-const db = mongoose.connection;
+// const db = mongoose.connection;
 
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-    console.log('MongoDB database connected!');
-});
+// db.on('error', console.error.bind(console, 'connection error:'));
+// db.once('open', function() {
+//     console.log('MongoDB database connected!');
+// });
 
-module.exports = db;
+module.exports = mongoose.connection;
