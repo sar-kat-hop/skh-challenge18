@@ -7,17 +7,18 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
     getOneThought(req, res) {
-        Thought.findOne({ _id: req.params.thoughtId}) //not sure about params syntax
+        Thought.findOne({ _id: req.params.id }) //not sure about params syntax
             .then((thought) => {
+                // console.log(thought);
                 !thought 
                     ? res.status(404).json({message:'thought not found'})
-                    : res.json(user)
+                    : res.json(thought)
             })
             .catch((err) => res.status(500).json(err));
     },
     updateThought(req, res) {
         Thought.findOneAndUpdate(
-            { _id: req.params.thoughtId },
+            { _id: req.params.id },
             { ...req.body },
             { new: true },
         )
@@ -45,7 +46,7 @@ module.exports = {
             .catch((err) => res.status(400).json(err));
     },
     deleteThought(req, res) {
-        Thought.findOneAndDelete({ _id: req.params.thoughtId })
+        Thought.findOneAndDelete({ _id: req.params.id })
             .then((thought) => {
                 return User.findOneAndUpdate(
                     { _id: thought.userId },
@@ -63,20 +64,25 @@ module.exports = {
         )
             .then((thought) =>
                 !thought
-                    ? res.status(400).json({ message: 'There is no thought with that associated ID.' })
+                    ? res.status(400).json({ message: 'There is no thought with that id.' })
                     : res.json(thought)
             )
             .catch((err) => res.status(500).json(err));
     },
+    //currently not working
     deleteReaction(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $pull: { reactions: { reactionId: req.params.reactionId } } },
+            { $pull: { reactions: { reactionID: req.params.thoughtId } } },
             { new: true }
         )
+
+        // console.log(req.params.thoughtId);
+        // console.log(req.params.id)
+
             .then((thought) =>
                 !thought
-                    ? res.status(400).json({ message: 'There is no thought with that associated ID.' })
+                    ? res.status(400).json({ message: 'There is no thought with that id.' })
                     : res.json(thought)
             )
             .catch((err) => res.status(500).json(err));

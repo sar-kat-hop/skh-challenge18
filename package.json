@@ -5,13 +5,17 @@
     "mongoose": "^6.0.13"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "seed": "node ./utils/seed.js",
+    "watch": "nodemon server.js"
   },
   "name": "skh-challenge18",
   "description": "NoSQL social network API",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sar-kat-hop/skh-challenge18.git"
