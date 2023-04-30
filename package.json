@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^5.3.0",
+    "mongoose": "^6.0.13"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "skh-challenge18",
+  "description": "NoSQL social network API",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sar-kat-hop/skh-challenge18.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sar-kat-hop/skh-challenge18/issues"
+  },
+  "homepage": "https://github.com/sar-kat-hop/skh-challenge18#readme"
+}
