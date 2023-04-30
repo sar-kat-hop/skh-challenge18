@@ -1,25 +1,38 @@
 const router = require('express').Router();
+
+//TODO: double check these are named correctly 
 const {
     getThoughts,
     getOneThought,
     updateThought, //PUT
     createThought, //POST
-    removeThought, //DELETE
+    deleteThought, //DELETE
     addReaction, //new reaction
-    removeReaction // delete reaction
+    deleteReaction // delete reaction
 } = require('../../controllers/thoughtController.js');
 
 // get all thoughts
-router.route('/api/thoughts').get(getThoughts);
+router.route('/')
+    .get(getThoughts);
 
-// get one thought
-
-// update thought
+// get, put (update), delete one thought
+router.route('/:id')
+    .get(getOneThought)
+    .put(updateThought)
+    .delete(deleteThought);
 
 // create new thought
-
-// delete thought
+// does it need to be router.route('/:userId')?
+router.route('/')
+    .post(createThought)
 
 // create new reaction
+router.route('/:thoughtId/reactions/:reactionId')
+    .post(addReaction);
 
 // delete reaction
+router.route('/:thoughtId/reactions/:reactionId')
+    .delete(deleteReaction);
+    
+
+module.exports = router;
