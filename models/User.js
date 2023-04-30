@@ -1,12 +1,27 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+const { Schema, Types, model } = require('mongoose');
 
-const userSchema = new mongoose.Schema(
+const userSchema = new Schema(
     {
-        _id: { type: Schema.ObjectId },
-        username: { String, unique: true, required: true, trim: true },
-        email: { String, unique: true, required: true }, //add validation
-        thoughts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Thought'}], //array of _id values referencing Thought model
-        friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User'}], //array of_id values referencing User model (self-reference)
+        // _id: { type: Schema.ObjectId },
+        username: { 
+            type: String, 
+            unique: true, 
+            required: true, 
+            trim: true 
+        },
+        email: { 
+            type: String, 
+            unique: true, 
+            required: true,
+            // TODO: add validation regex (match: regex)
+        },
+        thoughts: [
+            { type: Types.ObjectId, ref: 'Thought'} //array of _id values referencing Thought model
+        ], 
+        friends: [
+            { type: Types.ObjectId, ref: 'User'} //array of_id values referencing User model (self-reference)
+        ], 
     },
     {
         toJSON: {
@@ -18,14 +33,6 @@ const userSchema = new mongoose.Schema(
 
 //TODO: add virtual for friendCount retrieving length of user's friends array on query
 
-const User = mongoose.model('User', userSchema);
-
-const errHandler = (err) => console.error(err);
-
-// User.create(
-//     {
-
-//     }
-// );
+const User = model('User', userSchema);
 
 module.exports = User;

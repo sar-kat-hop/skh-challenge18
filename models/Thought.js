@@ -1,43 +1,67 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+const { Schema, Types, model } = require('mongoose');
 
-const thoughtSchema = new mongoose.Schema(
+const thoughtSchema = new Schema(
     {
-        _id: { type: mongoose.Schema.Types.ObjectId },
-        thoughtText: { String, required: true, minLength: 1, maxLength: 280 }, 
-        createdAt: { Date, default: Date.now },
-        username: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-        // reactions: [{ type: mongoose.Schema.Types.ObjectID, ref: 'Thought' }],
+        // _id: { type: ObjectId }, //no need to include this: mongoose will auto generate with id: false
+        thoughtText: { 
+            type: String, 
+            required: true, 
+            minLength: 1, 
+            maxLength: 280 
+        }, 
+        createdAt: { 
+            type: Date, 
+            default: Date.now, 
+        },
+        username: { 
+            type: String, 
+            required: true 
+        },
+        userId: {           
+            type: String, 
+            required: true 
+        },
         reactions: [reactionSchema]
     },
     {
         toJSON: {
             virtuals: true,
+            getters: true,
         },
         id: false,
     }
 );
 
-const reactionSchema = new mongoose.Schema({
-    reactionId: { type: mongoose.Schema.Types.ObjectId, default: mongoose.Types.ObjectId },
-    // reactionText: { type: mongoose.Schema.Types.ObjectID, ref: 'Thought'},
-    reactionText: { String, required: true, maxLength: 280 },
-    // username: { type: mongoose.Schema.Types.ObjectID, ref: 'User' },
-    username: { String, required: true },
-    createdAt: { Date, default: Date.now }
-})
+//include Reaction (schema only) as subdoc
+const reactionSchema = new Schema(
+    {
+        reactionId: { 
+            type: ObjectId, 
+            default: () => new Types.ObjectId()
+        },
+        reactionText: { 
+            type: String, 
+            required: true, 
+            maxLength: 280 
+        },
+        username: { 
+            type: String, 
+            required: true 
+        },
+        createdAt: { 
+            type: Date, 
+            default: Date.now,
+        },
+    }
+);
 
 //TODO: add virtual for reactionCount retrieving length of thought's reactions array on query
 
-const Thought = mongoose.model('Thought', thoughtSchema);
+thoughtSchema.virtual('reactionCount').get(function() {
+    return this.reactions.length;
+});
 
-const errHandler = (err) => console.error(err);
-
-// Thought.create(
-//     {
-
-//     }
-// );
-
-//include Reaction (schema only) as subdoc
+const Thought = model('Thought', thoughtSchema);
 
 module.exports = Thought;
