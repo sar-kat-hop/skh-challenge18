@@ -27,7 +27,7 @@ router.route('/')
     .post(createThought)
 
 // create new reaction
-router.route('/:thoughtId/reactions/:reactionId')
+router.route('/:thoughtId/reactions')
     .post(addReaction);
 
 // delete reaction
